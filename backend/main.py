@@ -47,7 +47,7 @@ class AnalysisRequest(BaseModel):
 
 @app.post("/api/analyze")
 def analyze_text(req: AnalysisRequest):
-    sys.stdout.write("🔍 openai.api_base =", openai.api_base)
+    sys.stdout.write("🔍 openai.api_base ={openai.api_base}")
     chunk = get_middle_chunk(req.text, length=5000)
     prompt = f"""
     Given the following book text, extract a list of characters and their interactions.
