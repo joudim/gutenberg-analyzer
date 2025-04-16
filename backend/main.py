@@ -6,9 +6,11 @@ import os
 import sys
 from pydantic import BaseModel
 
-openai.api_key = os.environ.get('OPENAI_API_KEY')
-openai.api_base = "https://api.groq.com/openai/v1"
 
+client = openai.OpenAI(
+    base_url="https://api.groq.com/openai/v1",
+    api_key=os.environ.get("OPENAI_API_KEY")
+)
 app = FastAPI()
 
 app.add_middleware(
@@ -47,7 +49,6 @@ class AnalysisRequest(BaseModel):
 
 @app.post("/api/analyze")
 def analyze_text(req: AnalysisRequest):
-    sys.stdout.write("🔍 openai.api_base ={openai.api_base}")
     chunk = get_middle_chunk(req.text, length=5000)
     prompt = f"""
     Given the following book text, extract a list of characters and their interactions.
@@ -69,7 +70,7 @@ def analyze_text(req: AnalysisRequest):
     """
 
     try:
-        response = openai.chat.completions.create(
+        response = client.chat.completions.create(
             model="gemma2-9b-it",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.3,
@@ -100,7 +101,7 @@ def extract_quotes(req: AnalysisRequest):
     """
 
     try:
-        response = openai.chat.completions.create(
+        response = client.chat.completions.create(
             model="gemma2-9b-it",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.5,
