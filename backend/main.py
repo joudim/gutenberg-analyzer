@@ -75,7 +75,7 @@ def analyze_text(req: AnalysisRequest):
             messages=[{"role": "user", "content": prompt}],
             temperature=0.3,
         )
-        return {"result": response['choices']['message']['content']}
+        return {"result": response.choices[0].message.content}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"❌ LLM ERROR:{str(e)}")
 
@@ -106,7 +106,7 @@ def extract_quotes(req: AnalysisRequest):
             messages=[{"role": "user", "content": prompt}],
             temperature=0.5,
         )
-        return {"quotes": response.choices.message.content}
+        return {"quotes": response.choices[0].message.content}
     except Exception as e:
        raise HTTPException(status_code=500, detail=f"❌ Quote sentiment error: {str(e)}")
 
