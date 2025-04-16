@@ -7,7 +7,6 @@ from pydantic import BaseModel
 
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 openai.api_base = "https://api.groq.com/openai/v1"
-print("🔍 openai.api_base =", openai.api_base)
 
 app = FastAPI()
 
@@ -47,6 +46,7 @@ class AnalysisRequest(BaseModel):
 
 @app.post("/api/analyze")
 def analyze_text(req: AnalysisRequest):
+    os.stdout("🔍 openai.api_base =", openai.api_base)
     chunk = get_middle_chunk(req.text, length=5000)
     prompt = f"""
     Given the following book text, extract a list of characters and their interactions.
