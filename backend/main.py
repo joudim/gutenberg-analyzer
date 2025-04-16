@@ -5,7 +5,7 @@ import openai
 import os
 from pydantic import BaseModel
 
-openai.api_key = os.environ.get("OPENAI_API_KEY")
+openai.api_key = os.environ.get('OPENAI_API_KEY')
 openai.api_base = "https://api.groq.com/openai/v1"
 print("🔍 openai.api_base =", openai.api_base)
 
