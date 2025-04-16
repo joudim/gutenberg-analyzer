@@ -15,7 +15,7 @@ export default function App() {
   const fetchBook = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/book?id=${bookId}`);
+      const response = await fetch(`https://gutenberg-analyzer-backend.onrender.com/api/book?id=${bookId}`);
       const data = await response.json();
       if (data && data.content) {
         setBookText(data.content);
@@ -33,7 +33,7 @@ export default function App() {
   const analyzeBook = async () => {
     setAnalyzing(true);
     try {
-      const response = await fetch("http://localhost:8000/api/analyze", {
+      const response = await fetch("https://gutenberg-analyzer-backend.onrender.com/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: bookText }),
@@ -58,7 +58,7 @@ export default function App() {
     setLoadingQuotes(true);
     console
     try {
-      const response = await fetch("http://localhost:8000/api/quotes", {
+      const response = await fetch("https://gutenberg-analyzer-backend.onrender.com/api/quotes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: bookText }),
