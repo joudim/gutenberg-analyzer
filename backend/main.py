@@ -69,7 +69,7 @@ def analyze_text(req: AnalysisRequest):
 
     try:
         response = openai.chat.completions.create(
-            model="llama-3-70b-8192",
+            model="llama-3.3-70b-versatile",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.3,
         )
@@ -100,7 +100,7 @@ def extract_quotes(req: AnalysisRequest):
 
     try:
         response = openai.chat.completions.create(
-            model="llama-3-70b-8192",
+            model="llama-3.3-70b-versatile",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.5,
         )
